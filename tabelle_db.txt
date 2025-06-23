@@ -1,0 +1,16 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    private_key TEXT DEFAULT NULL,
+    public_key TEXT DEFAULT NULL,
+    is_new TINYINT(1) NOT NULL DEFAULT 1,
+    key_del TINYINT(1) NOT NULL DEFAULT 0
+);
+
+CREATE TABLE dss_public_key (
+    id INT PRIMARY KEY CHECK (id = 1),
+    name VARCHAR(255) NOT NULL,
+    key_data MEDIUMTEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
