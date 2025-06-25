@@ -433,37 +433,6 @@ def Get_Public_Key(username: str):
         cursor.close()
         db_conn.close()
 
-def Get_Public_Key(username: str):
-
-    db_conn = open_db_connection()
-    if db_conn is None:
-        print("Error connecting db")
-        return False, 0
-
-    try:
-        cursor = db_conn.cursor()
-        cursor.execute("SELECT public_key FROM users WHERE username = %s", (username,))
-        row = cursor.fetchone()
-
-        if row is None:
-            print("User not found")
-            return False, 0
-
-        public_key_pem = row[0]
-        if public_key_pem is None:
-            print("Public key not founded for user " + username)
-            return False , 1
-
-        return True, public_key_pem
-
-    except mysql.connector.Error as err:
-        print(f"Query error: {err}")
-        return False, 0
-
-    finally:
-        cursor.close()
-        db_conn.close()
-
 def Delete_Keys(username: str):
 
     db_conn = open_db_connection()
